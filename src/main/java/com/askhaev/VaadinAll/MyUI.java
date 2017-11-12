@@ -9,6 +9,7 @@ import com.vaadin.shared.ui.ValueChangeMode;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import com.vaadin.ui.themes.ValoTheme;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.servlet.annotation.WebServlet;
 import java.util.List;
@@ -28,6 +29,9 @@ public class MyUI extends UI {
     private Grid<Customer> grid = new Grid<>(Customer.class);
     private TextField filterText = new TextField();
     private CustomerForm form = new CustomerForm(this);
+
+    @Autowired
+    private UserPage userPage;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -57,7 +61,7 @@ public class MyUI extends UI {
         // fetch list of Customers from service and assign it to Grid
         updateList();
 
-        setContent(layout);
+        setContent(userPage);
     }
 
     public void updateList() {
